@@ -11,18 +11,16 @@ namespace GraphAPI_1
         private static readonly string _clientId = "38478b47-0715-4ce9-8d56-90ff0d503ce4";
         static async Task Main(string[] args)
         {
-            var app = PublicClientApplicationBuilder.Create(_clientId)
-                .WithRedirectUri("http://localhost")
-                .Build();
 
             string[] scopes = new string[] { 
                 "User.Read", 
                 "Directory.Read.All"
             };
 
-            var result = await app.AcquireTokenInteractive(scopes).ExecuteAsync();
+            var authProvider = new AuthProvider(_clientId, scopes);
 
-            var token = result.AccessToken;
+            var token = authProvider.GetAccessToken().Result;
+            Console.WriteLine($"Access token: {token}");
 
             var photoJson = await "https://graph.microsoft.com/v1.0/me/photo/"
                 .WithOAuthBearerToken(token)
