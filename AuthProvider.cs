@@ -14,12 +14,12 @@ namespace GraphAPI_1
         private string[] _scopes;
         private IAccount _userAccount;
 
-        public AuthProvider(string appId, string[] scopes)
+        public AuthProvider(string clientId, string[] scopes)
         {
             _scopes = scopes;
 
             _msalClient = PublicClientApplicationBuilder
-                .Create(appId)
+                .Create(clientId)
                 .WithAuthority(AadAuthorityAudience.AzureAdAndPersonalMicrosoftAccount, true)
                 .Build();
         }
