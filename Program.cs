@@ -19,6 +19,8 @@ namespace GraphAPI_1
             var result = await app.AcquireTokenInteractive(scopes).ExecuteAsync();
 
             var token = result.AccessToken;
+
+
         }
     }
 }
