@@ -15,7 +15,10 @@ namespace GraphAPI_1
                 .WithRedirectUri("http://localhost")
                 .Build();
 
-            string[] scopes = new string[] { "User.Read" };
+            string[] scopes = new string[] { 
+                "User.Read", 
+                "Directory.Read.All"
+            };
 
             var result = await app.AcquireTokenInteractive(scopes).ExecuteAsync();
 
@@ -24,13 +27,22 @@ namespace GraphAPI_1
             var photoJson = await "https://graph.microsoft.com/v1.0/me/photo/"
                 .WithOAuthBearerToken(token)
                 .GetStringAsync();
+            Console.WriteLine("My Photo Infomation:");
             Console.WriteLine(photoJson);
 
              var drive = await "https://graph.microsoft.com/v1.0/me/drive/"
                 .WithOAuthBearerToken(token)
                 .GetStringAsync();
 
+            Console.WriteLine("My OneDrive:");
             Console.WriteLine(drive);
+
+
+            var users = await "https://graph.microsoft.com/v1.0/users/"
+                .WithOAuthBearerToken(token)
+                .GetStringAsync();
+            Console.WriteLine("Users in org:");
+            Console.WriteLine(users);
 
         }
     }
