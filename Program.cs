@@ -26,6 +26,12 @@ namespace GraphAPI_1
                 .GetStringAsync();
             Console.WriteLine(photoJson);
 
+             var drive = await "https://graph.microsoft.com/v1.0/me/drive/"
+                .WithOAuthBearerToken(token)
+                .GetStringAsync();
+
+            Console.WriteLine(drive);
+
         }
     }
 }
