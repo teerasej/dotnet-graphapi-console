@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.Identity.Client;
+using Flurl.Http;
 
 namespace GraphAPI_1
 {
@@ -20,6 +21,10 @@ namespace GraphAPI_1
 
             var token = result.AccessToken;
 
+            var photoJson = await "https://graph.microsoft.com/v1.0/me/photo/"
+                .WithOAuthBearerToken(token)
+                .GetStringAsync();
+            Console.WriteLine(photoJson);
 
         }
     }
