@@ -37,5 +37,18 @@ namespace GraphAPI_1
                 return null;
             }
         }
+
+        public static async Task<IDriveItemChildrenCollectionPage> GetUserDriveItems() {
+            try
+            {
+                var drives = await graphClient.Me.Drives.Request().GetAsync();
+                return await graphClient.Me.Drives[drives[0].Id].Root.Children.Request().GetAsync();
+            }
+            catch (ServiceException ex)
+            {
+                Console.WriteLine($"Error getting signed-in user: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

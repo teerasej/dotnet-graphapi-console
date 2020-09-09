@@ -26,6 +26,9 @@ namespace GraphAPI_1
             var userPhoto = GraphHelper.GetUserPhotoAsync().Result;
             Console.WriteLine($"My Photo Infomation: {userPhoto}");
 
+            var driveItems = GraphHelper.GetUserDriveItems().Result;
+            Console.WriteLine($"Items in Drive: {driveItems.Count}");
+
 
 
         }
