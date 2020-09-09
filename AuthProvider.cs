@@ -21,6 +21,7 @@ namespace GraphAPI_1
             _msalClient = PublicClientApplicationBuilder
                 .Create(clientId)
                 .WithAuthority(AadAuthorityAudience.AzureAdAndPersonalMicrosoftAccount, true)
+                .WithRedirectUri("http://localhost")
                 .Build();
         }
 
@@ -39,11 +40,7 @@ namespace GraphAPI_1
                 {
                     // Invoke device code flow so user can sign-in with a browser
                     // Don't forget to turn on default client type: https://github.com/azuread/microsoft-authentication-library-for-dotnet/wiki/Client-Applications#invalid-client
-                    var result = await _msalClient.AcquireTokenWithDeviceCode(_scopes, callback => {
-                        Console.WriteLine(callback.Message);
-                        Console.WriteLine(callback.DeviceCode);
-                        return Task.FromResult(0);
-                    }).ExecuteAsync();
+                    var result = await _msalClient.AcquireTokenInteractive(_scopes).ExecuteAsync();
 
                     _userAccount = result.Account;
                     return result.AccessToken;
