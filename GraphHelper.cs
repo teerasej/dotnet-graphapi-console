@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.Graph;
 
 namespace GraphAPI_1
@@ -10,6 +11,19 @@ namespace GraphAPI_1
         public static void Initialize(IAuthenticationProvider authProvider)
         {
             graphClient = new GraphServiceClient(authProvider);
+        }
+
+        public static async Task<User> GetMeAsync()
+        {
+            try
+            {
+                return await graphClient.Me.Request().GetAsync();
+            }
+            catch (ServiceException ex)
+            {
+                Console.WriteLine($"Error getting signed-in user: {ex.Message}");
+                return null;
+            }
         }
     }
 }
