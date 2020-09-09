@@ -25,5 +25,17 @@ namespace GraphAPI_1
                 return null;
             }
         }
+
+        public static async Task<ProfilePhoto> GetUserPhotoAsync() {
+            try
+            {
+                return await graphClient.Me.Photo.Request().GetAsync();
+            }
+            catch (ServiceException ex)
+            {
+                Console.WriteLine($"Error getting signed-in user: {ex.Message}");
+                return null;
+            }
+        }
     }
 }

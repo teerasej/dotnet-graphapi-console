@@ -23,7 +23,8 @@ namespace GraphAPI_1
             var user = GraphHelper.GetMeAsync().Result;
             Console.WriteLine($"Welcome {user.DisplayName}\n");
 
-            Console.WriteLine($"My Photo Infomation: ${user.Photo}");
+            var userPhoto = GraphHelper.GetUserPhotoAsync().Result;
+            Console.WriteLine($"My Photo Infomation: ${userPhoto}");
             Console.WriteLine($"Items in Drive: ${user.Drive.Items.Count}");
 
 
