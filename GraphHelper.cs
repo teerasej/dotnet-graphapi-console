@@ -26,7 +26,8 @@ namespace GraphAPI_1
             }
         }
 
-        public static async Task<ProfilePhoto> GetUserPhotoAsync() {
+        public static async Task<ProfilePhoto> GetUserPhotoAsync()
+        {
             try
             {
                 return await graphClient.Me.Photo.Request().GetAsync();
@@ -38,11 +39,11 @@ namespace GraphAPI_1
             }
         }
 
-        public static async Task<IDriveItemChildrenCollectionPage> GetUserDriveItems() {
+        public static async Task<IDriveItemChildrenCollectionPage> GetUserDriveItems()
+        {
             try
             {
-                var drives = await graphClient.Me.Drives.Request().GetAsync();
-                return await graphClient.Me.Drives[drives[0].Id].Root.Children.Request().GetAsync();
+                return await graphClient.Me.Drive.Root.Children.Request().GetAsync();
             }
             catch (ServiceException ex)
             {
