@@ -23,28 +23,10 @@ namespace GraphAPI_1
             var user = GraphHelper.GetMeAsync().Result;
             Console.WriteLine($"Welcome {user.DisplayName}\n");
 
-            var token = authProvider.GetAccessToken().Result;
-            Console.WriteLine($"Access token: {token}");
-
-            var photoJson = await "https://graph.microsoft.com/v1.0/me/photo/"
-                .WithOAuthBearerToken(token)
-                .GetStringAsync();
-            Console.WriteLine("My Photo Infomation:");
-            Console.WriteLine(photoJson);
-
-             var drive = await "https://graph.microsoft.com/v1.0/me/drive/"
-                .WithOAuthBearerToken(token)
-                .GetStringAsync();
-
-            Console.WriteLine("My OneDrive:");
-            Console.WriteLine(drive);
+            Console.WriteLine($"My Photo Infomation: ${user.Photo}");
+            Console.WriteLine($"Items in Drive: ${user.Drive.Items.Count}");
 
 
-            var users = await "https://graph.microsoft.com/v1.0/users/"
-                .WithOAuthBearerToken(token)
-                .GetStringAsync();
-            Console.WriteLine("Users in org:");
-            Console.WriteLine(users);
 
         }
     }
