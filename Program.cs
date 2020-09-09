@@ -21,10 +21,10 @@ namespace GraphAPI_1
 
             var token = result.AccessToken;
 
-            var photoJson = await "https://graph.microsoft.com/v1.0/me/photo/"
+            var me = await "https://graph.microsoft.com/v1.0/me/"
                 .WithOAuthBearerToken(token)
                 .GetStringAsync();
-            Console.WriteLine(photoJson);
+            Console.WriteLine(me);
 
         }
     }
