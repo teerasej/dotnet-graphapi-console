@@ -19,6 +19,10 @@ namespace GraphAPI_1
 
             var authProvider = new AuthProvider(_clientId, scopes);
 
+            GraphHelper.Initialize(authProvider);
+            var user = GraphHelper.GetMeAsync().Result;
+            Console.WriteLine($"Welcome {user.DisplayName}\n");
+
             var token = authProvider.GetAccessToken().Result;
             Console.WriteLine($"Access token: {token}");
 
