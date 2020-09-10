@@ -26,7 +26,7 @@ namespace GraphAPI_1
             Console.WriteLine($"Welcome {user.DisplayName}\n");
 
             var userPhoto = GraphHelper.GetUserPhotoAsync().Result;
-            Console.WriteLine($"My Photo Infomation: {userPhoto}");
+            Console.WriteLine($"My Photo Infomation: {userPhoto.Width} x {userPhoto.Height}");
 
             var photoStream = GraphHelper.GetUserPhotoContentAsync().Result;
             string path = Path.Combine("", "photo.jpg");
