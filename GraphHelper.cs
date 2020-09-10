@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Graph;
 
@@ -31,6 +32,19 @@ namespace GraphAPI_1
             try
             {
                 return await graphClient.Me.Photo.Request().GetAsync();
+            }
+            catch (ServiceException ex)
+            {
+                Console.WriteLine($"Error getting signed-in user: {ex.Message}");
+                return null;
+            }
+        }
+
+        public static async Task<Stream> GetUserPhotoContentAsync()
+        {
+            try
+            {
+                return await graphClient.Me.Photo.Content.Request().GetAsync();
             }
             catch (ServiceException ex)
             {
